@@ -20,7 +20,7 @@ $$script[src="https://www.googletagservices.com/"]
 ! CONDITIONS END
 
 ! WHITELIST START
-@@/^https?:\/\/edge\.microsoft\.com\/(extensionwebstorebase\/[a-z1-9]{2}\/(hash)?crx\?|(redirectordictionaries|hunspelldictionaries)\/)/$important
+!@@/^https?:\/\/edge\.microsoft\.com\/(extension(webstorebase|installverifier)\/[a-z1-9.]{2,4}\/(installverify|(hash)?crx\?|log(extensionreliability|failureinfo)\?)|(redirector|hunspell)dictionaries\/)/$important
 @@||connectivitycheck.gstatic.com^$important
 @@||safebrowsing.clients.google.com^$document
 @@||local.adguard.org^$script
@@ -28,7 +28,7 @@ $$script[src="https://www.googletagservices.com/"]
 ! WHITELIST END
 
 ! LAN START
-/^https?:\/\/192\.168\.[01]\.1/$third-party,domain=~0.0.0.0|~127.0.0.1|~192.168.0.1|~192.168.1.1|~[::1]|~[::]|~localhost|~
+/^https?:\/\/192\.168\.[01]\.1/$third-party,domain=~0.0.0.0|~127.0.0.1|~192.168.0.1|~192.168.1.1|~[::1]|~[::]|~localhost|~10.0.0.1
 ||0.0.0.0^$third-party,domain=~0.0.0.0|~127.0.0.1|~192.168.0.1|~192.168.1.1|~[::1]|~[::]|~localhost|~10.0.0.1
 ||127.0.0.0^$third-party,domain=~0.0.0.0|~127.0.0.1|~192.168.0.1|~192.168.1.1|~[::1]|~[::]|~localhost|~10.0.0.1
 ||10.0.0.1^$third-party,domain=~0.0.0.0|~127.0.0.1|~192.168.0.1|~192.168.1.1|~[::1]|~[::]|~localhost|~10.0.0.1
@@ -303,7 +303,6 @@ $$script[src="https://www.googletagservices.com/"]
 ||connect.facebook.net^$important
 ||connect.mail.ru^$important
 ||connect.ok.ru^$important
-||cse.google.com^$important
 ||desktop-dna.osp.opera.software^$important
 ||disqus.com^$important
 ||disquscdn.com^$important
@@ -367,7 +366,7 @@ $$script[src="https://www.googletagservices.com/"]
 ||ofa-sub.osp.opera.software^$important
 ||op-mobile.opera.com^$important
 ||opera-api.com^$important
-||edge.activity.windows.com^$important
+
 ||operacoinexchange.com^$important
 ||yadro.ru^$important
 ||opr.as^$important
@@ -428,19 +427,13 @@ $$script[src="https://www.googletagservices.com/"]
 ! IMAGE END
 
 ! POPUP & POPUNDER START
-/^https?:\/\/(bitly|bit)\.(com|ly)/$important,popunder,popup
-|http*:*&idzone=$important,popunder,popup
-||click2go.me^$important,popunder,popup
-||gemius.pl^$important,popunder,popup
-||yandex.*/clck/$important,popunder,popup
 ||yastatic.net^$important,popunder,popup,domain=~kinopoisk.ru
 ||hola.org^$popup,important
 ! POPUP & POPUNDER END
 
 ! APP START
-/^(?!.*(lfnnmlimilinwvwlijljioeogq13\.club|(firebaseio|googleapis|pbssrv\-centralevents|verifykit)\.com)).*$/$app=important,app.source.getcontact
+/^(?!.*(lfnnmlimilinwvwlijljioeogq13\.club|(firebaseio|googleapis|pbssrv\-centralevents|verifykit)\.com)).*$/$important,app=app.source.getcontact
 ||www.facebook.com^$important,app=system
-||zen.yandex.ru^$domain=startpage,third-party,app=opera.exe
 ! APP END
 
 ! SCRIPTLET START
@@ -449,36 +442,35 @@ google.*#%#//scriptlet("remove-attr", "ping", "div[class] > a[ping]")
 infourok.ru##+js(addEventListener-defuser.js, focus)
 infourok.ru##+js(addEventListener-defuser.js, focus, trigger)
 infourok.ru##+js(set-constant.js, monitorFocus, noopFunc)
-vk.com#%#//scriptlet("abort-on-property-read", "Unauthorized")
 zloekino.ru##+js(cookie-remover.js)
-zloekino.ru#%#//scriptlet("remove-cookie")
 infourok.ru##+js(abort-on-property-write.js, document.ondragstart)
 infourok.ru##+js(abort-on-property-write.js, document.onselectstart)
 infourok.ru##+js(js-rm.js, yaCounter)
 ! SCRIPTLET END
 
 ! Cascading Style Sheets (CSS) START
+##[id*="div-gpt-ad"]
 ##iframe[src*="amazon-adsystem.com"]
 ##iframe[src*="awaps.yandex.net"]
 ##iframe[src*="imasdk.googleapis.com"]
 ##iframe[src="about:blank"]
-aliexpress.*###j-festival-container > .festival-sub-venue, .multi-sidebar-outer-rus.multi-sidebar-outer, .product-fix-wrap, #J_xiaomi_dialog, .site-footer, .ng-mobile.ng-item, .hot-words, .top-banner-container, .site-server-box, .user-helper-footer, .fm-sns, .ams-region, .seo-container.product-container, .search-feedback-wrap, .footer-copywrite, #container-for-smart-banner, .header-right-content, .drogue-poplayer-modal
+aliexpress.*###j-festival-container > .festival-sub-venue, .multi-sidebar-outer-rus.multi-sidebar-outer, .product-fix-wrap, #J_xiaomi_dialog, .site-footer, .ng-mobile.ng-item, .hot-words, .top-banner-container, .site-server-box, .user-helper-footer, .fm-sns, .ams-region, .seo-container.product-container, .search-feedback-wrap, .footer-copywrite, #container-for-smart-banner, .header-right-content, .drogue-poplayer-modal, [class*="styles_bannerLink"], [class*="styles_body_"]
 freebitco.in###myModal22:has-text(Did you know?)
 freebitco.in##.daily_jackpot_main_container_div, #deposit_promo_message_regular, #play_without_captcha_container, .reveal-modal-bg
 yandex.ru##.media-grid_js_inited.font-regular.i-bem.media-grid_theme_white.media-grid_visible_yes.media-grid, .header-favorites-button_js_inited.header-favorites-button
 mail.yandex.ru##.mail-Placeholder-Text, .mail-ThreadSidebar-wrap.ns-view-thread-sidebar-wrap, .mail-MailProAnnouncingPromoLeftColumn
-music.yandex.ru##.duck__duckling.moving-slider, .multi-auth__plus, .teaser, .sidebar__under, .page-main__line_row.page-main__line_small-margin.page-main__line_personal-playlists.page-main__line, .notify_shown.deco-tooltip_notify, .footer, .metrika-app_shown_yes.metrika-app_js_inited.i-bem.metrika-app_type_desktop.metrika-app_lang_ru.metrika-app, .duck__angry-duck_left.duck__angry-duck.paused-slider, .bar-below_plus.bar-below, .subscription-hint_bottom.deco-pane-popup.popup.local-theme-black.subscription-hint, div.notify > div.deco-tooltip_notify.notify_shown, .overlay_gdpr.overlay_shown.deco-pane-overlay.overlay, .deco-pane-popup.popup.local-icon-theme-white.local-theme-white.gdpr-popup, .bar-below_unavaliable.bar-below, a.teaser__content[href="https://music.yandex.ru/family-plus"] > img.teaser__img, div.page-root.page-root_no-player.deco-pane-back > div[class][data-b="2"][style="display: block;"], .teaser ~ div, .page-root > div[data-b="2"], .sidebar > div > .teaser + div[data-b="18"], .deco-tooltip_to-right.popup_visible.popup_fade.local-theme-black.d-tooltip_min-width.deco-pane-popup.popup.deco-tooltip.d-tooltip, .overlay_shown.deco-pane-overlay.overlay, .popup_modal.deco-pane-popup.popup.local-icon-theme-white.local-theme-white.popup_compact.crackdown-popup, .teaser-nonmusic_visible.teaser-nonmusic, .progress__line__branding, .paused-slider_left.porsche.paused-slider, .bar__branding_picture, .bar-below__auth, .bar-below__content, .bar__branding, .subscription-hint.popup, .bar__addition-link, body > div[style^="min-height"] > .notify *, body > div[style^="min-height"] > div[class][style="display: block;"], body > div[style^="min-height"] > .notify, [class^="audio-advert"], .subscription-hint.popup, .bar.bar-below, .ads-block, .share-container, .share.unit, .notify__message, div.notify > div.deco-tooltip_notify.notify_shown, .d-overhead-mobile__content_app, a.teaser__content[href="https://music.yandex.ru/family-plus"] > img.teaser__img, .bar-below, .no-ads, .button-store_all, .app-sms, a[href="/contest/dogmoroz"], .subscription-hint, .bar__driver-container, .sidebar__placeholder .teaser ~ div, div[id^="ya_partner_R-A-"], .page-root > div.d-overhead, .audio-advert__block, .popup_modal.deco-pane-popup.popup.payment-plus-popup, .shifted-right.deco-tooltip_to-right.popup_visible.popup_fade.local-theme-black.deco-pane-popup.popup.deco-tooltip.d-tooltip
+music.yandex.ru##.duck__duckling.moving-slider, .multi-auth__plus, .teaser, .sidebar__under, .page-main__line_row.page-main__line_small-margin.page-main__line_personal-playlists.page-main__line, .notify_shown.deco-tooltip_notify, .footer, .metrika-app_shown_yes.metrika-app_js_inited.i-bem.metrika-app_type_desktop.metrika-app_lang_ru.metrika-app, .duck__angry-duck_left.duck__angry-duck.paused-slider, .bar-below_plus.bar-below, .subscription-hint_bottom.deco-pane-popup.popup.local-theme-black.subscription-hint, div.notify > div.deco-tooltip_notify.notify_shown, .overlay_gdpr.overlay_shown.deco-pane-overlay.overlay, .deco-pane-popup.popup.local-icon-theme-white.local-theme-white.gdpr-popup, .bar-below_unavaliable.bar-below, a.teaser__content[href="https://music.yandex.ru/family-plus"] > img.teaser__img, div.page-root.page-root_no-player.deco-pane-back > div[class][data-b="2"][style="display: block;"], .teaser ~ div, .page-root > div[data-b="2"], .sidebar > div > .teaser + div[data-b="18"], .deco-tooltip_to-right.popup_visible.popup_fade.local-theme-black.d-tooltip_min-width.deco-pane-popup.popup.deco-tooltip.d-tooltip, .overlay_shown.deco-pane-overlay.overlay, .popup_modal.deco-pane-popup.popup.local-icon-theme-white.local-theme-white.popup_compact.crackdown-popup, .teaser-nonmusic_visible.teaser-nonmusic, .progress__line__branding, .paused-slider_left.porsche.paused-slider, .bar__branding_picture, .bar-below__auth, .bar-below__content, .bar__branding, .subscription-hint.popup, .bar__addition-link, body > div[style^="min-height"] > .notify *, body > div[style^="min-height"] > div[class][style="display: block;"], body > div[style^="min-height"] > .notify, [class^="audio-advert"], .subscription-hint.popup, .bar.bar-below, .ads-block, .share-container, .share.unit, .notify__message, div.notify > div.deco-tooltip_notify.notify_shown, .d-overhead-mobile__content_app, a.teaser__content[href="https://music.yandex.ru/family-plus"] > img.teaser__img, .bar-below, .no-ads, .button-store_all, .app-sms, a[href="/contest/dogmoroz"], .subscription-hint, .bar__driver-container, .sidebar__placeholder .teaser ~ div, div[id^="ya_partner_R-A-"], .page-root > div.d-overhead, .audio-advert__block
 music.yandex.ru##span:contains(Отключить рекламу)
 pornhub.*,pornhubthbh7ap3u.onion##div.clear-both.videoSection:has-text(/только для Фанатов/)
-trade.aliexpress.*##[href^="//simplee.aliexpress.com/"], div.grid-col-container:last-child, [href^="//campaign.aliexpress.com/"]
+trade.aliexpress.*##[href^="//simplee.aliexpress.com/"], [href^="//campaign.aliexpress.com/"]
 twitch.tv##.default-panel > :not([href*="vk.com"]):not([href*="donationalerts."]):not([href*="instagram.com"]):not([href*="youtube.com"]):not([href*="twitter.com"]):not([href*="steamcommunity.com"]):not([href*="discord.gg"]):not([href*="facebook.com"])
-twitch.tv##.tw-lg-flex.tw-hide, .tw-z-default.channel-leaderboard, .tw-mg-r-1.tw-justify-content-end.tw-flex.tw-align-items-center, .tw-relative > .tw-relative.tw-overflow-hidden.tw-justify-content-center.tw-interactive.tw-inline-flex.tw-full-width.tw-core-button--primary.tw-core-button.tw-border-top-right-radius-medium.tw-border-top-left-radius-medium.tw-border-bottom-right-radius-medium.tw-border-bottom-left-radius-medium.tw-align-middle.tw-align-items-center, .low-latency-notification, .tw-inline-block.tw-full-width, .recommended-channels, .tw-z-default.pinned-cheer-v2, .tw-relative > .tw-relative.tw-overflow-hidden.tw-justify-content-center.tw-interactive.tw-inline-flex.tw-full-width.tw-core-button--secondary.tw-core-button.tw-border-top-right-radius-medium.tw-border-top-left-radius-medium.tw-border-bottom-right-radius-medium.tw-border-bottom-left-radius-medium.tw-align-middle.tw-align-items-center, .muted-segments-alert, .tw-transition__slide-over-right--enter-done.tw-transition__slide-over-right.tw-transition--enter-done.tw-transition.tw-full-width.tw-full-height.tw-absolute, div.prime-offers.tw-relative, .tw-relative.tw-pd-x-1.tw-pd-b-2.tw-overflow-hidden.tw-elevation-4.tw-c-text-base.tw-border-t.tw-border-radius-medium.tw-border-r.tw-border-l.tw-border-b.mega-commerce-callout__background, .tw-lg-hide.tw-flex.tw-align-items-center, .tw-interactive[href^="https://twitch.amazon.com/"], a[href^="https://www.igdb.com/"], a[href^="https://www.twitch.tv/store"], a[href^="https://www.twitch.tv/p/giftcard"], a[href^="https://www.twitch.tv/turbo"], .tw-flex.tw-c-text-alt-2.tw-align-items-center.presence-text, .tw-relative > .tw-inline-flex.tw-full-width.tw-core-button.tw-border-top-right-radius-medium.tw-border-top-left-radius-medium.tw-border-bottom-right-radius-medium.tw-border-bottom-left-radius-medium.tw-align-middle.tw-align-items-center, .tw-justify-content-end.tw-flex-nowrap.tw-flex.tw-align-items-center > .tw-relative, .tw-justify-content-between.tw-flex-nowrap.tw-flex.theatre-social-panel > div > .tw-relative
+twitch.tv##.channel-leaderboard
 vk.com###stl_left, #stl_side, .apps_feedRightAppsBlock_collaborative_recommend_apps.apps_feedRightAppsBlock.page_block, .apps_feedRightAppsBlock_new_apps.apps_feedRightAppsBlock.page_block, #ads_left, .right_list_header, #group_recom_rows, #group_recom_wrap, .feed_friends_recomm, div[data-ad], div[data-ad-view], [class^="ads_ad_"], #stories_feed_wrap, #profile_friends_recomm, .ads_ads_box, #system_msg, #utils, .apps_feedRightAppsBlock_single_app.apps_feedRightAppsBlock.page_block, .audio_promo, #feed_blog_reminder, a[href*="/app7399325"], #l_watch_home, a[href*="/covid19"], div.more_div, .installApp,#ui_rmenu_coronavirus, #ui_rmenu_stayhome, .wall_marked_as_ads, .item_share, .apps_feedRightAppsBlock__row, .videoplayer_action_button, .ads_ad_box, .ads_ad_box2, [id*="reply_box_donut-"], .ShortVideoFeedBlock.page_block, .feed_groups_recomm, .feedAssistance_recommendedGroups, .eltt_vis.eltt_top.eltt_align_left.eltt_arrow_size_normal.CatalogTooltip.TooltipAudioRecommendedPlaylists.feature_intro_tt.eltt, .feedAssistance_promoButton.feedAssistance.wall_item
 vk.com##._post_content:has-text(Осторожно: тут про 3 сентября)
 vk.com##[class="wall_item"]:has([class*="ads_mark"])
 vk.com#?#.wall_wrap div[id^="post-"][-ext-has='div.post_content > div.post_info > div.wall_text > div.wall_post_cont > div.wall_marked_as_ads']
 xhamster.*##.list-items.wih-spot-container.right-rectangle, .wiz-ads-div, .wiz-cams-widget, .wiz-spa.wiz-spb, .cookie-announce.bottom-announce
-yadi.sk##.action-buttons__antifo-tooltip.tooltip_shown_yes.tooltip_theme_normal.tooltip_tone_default.tooltip_view_classic.tooltip_size_s.tooltip.popup2_target_anchor.popup2_visible_yes.popup2_direction_right-center.popup2_theme_normal.popup2_tone_default.popup2_view_classic.popup2, .mobile-badges, .software-header-product_win.software-header-product.hover-dropdown, .burger-sidebar__button.button2_theme_clear.button2_size_n.button2_view_classic.button2.control, .header__inline-services-menu.inline-services-menu, .app-promo-banner
+yadi.sk##.action-buttons__antifo-tooltip.tooltip_shown_yes.tooltip_theme_normal.tooltip_tone_default.tooltip_view_classic.tooltip_size_s.tooltip.popup2_target_anchor.popup2_visible_yes.popup2_direction_right-center.popup2_theme_normal.popup2_tone_default.popup2_view_classic.popup2, .mobile-badges, .software-header-product.hover-dropdown, .burger-sidebar__button.button2_theme_clear.button2_size_n.button2_view_classic.button2.control, .header__inline-services-menu.inline-services-menu, .app-promo-banner
 yandex.ru##^script:has-text(/\/yabs\./)
 yandex.ru##^script:has-text(AwapsJsonAPI)
 youtube.com##.ytp-button.ytp-paid-content-overlay-text, div#player-ads, #player-ads, .ytp-ce-element.ytp-ce-video.ytp-ce-element-show.ytp-ce-top-left-quad, .style-scope.ytd-mealbar-promo-renderer, .ytp-ce-element.ytp-ce-video.ytp-ce-element-show.ytp-ce-top-left-quad, div#movie_player > .ytp-ce-channel.ytp-ce-channel-this.ytp-ce-element.ytp-ce-element-show.ytp-ce-size-640.ytp-ce-top-right-quad, ytd-companion-slot-renderer.ytd-player-legacy-desktop-watch-ads-renderer, #masthead-ad, #alert-banner, YTM-PROMOTED-VIDEO-RENDERER, .mealbar-promo-renderer, a[href*="/covid19"], #content > .ytd-rich-section-renderer.style-scope, .ytp-ad-module, .ytd-carousel-ad-renderer, ytd-video-masthead-ad-advertiser-info-renderer,ytm-promoted-sparkles-web-renderer, .ytp-ad-progress, #promotion-shelf, .masthead-ad-control, .ad-div, .pyv-afc-ads-container, #clarify-box > .ytd-watch-flexy.style-scope, #sponsor-button, yt-live-chat-viewer-engagement-message-renderer, .ytd-video-secondary-info-renderer.style-scope.sticky, .ytp-ce-video.ytp-ce-element, .ytp-endscreen-content, ytd-compact-movie-renderer.ytd-watch-next-secondary-results-renderer.style-scope, .ytp-impression-link, .ytp-show-cards-title.ytp-chrome-top, #live-chat-banner
@@ -490,12 +482,9 @@ youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope > .ytd-she
 
 ! Content Security Policy (CSP) START
 /^https?:\/\/(www\.)?music\.yandex\.ru\//$important,csp=script-src 'unsafe-inline' 'unsafe-eval' music.yandex.ru *.youtube.com https://yastatic.net local.adguard.org injections.adguard.org *.jquery.com; connect-src 'self' data: music.yandex.ru storage.mds.yandex.net wss: https://api.passport.yandex.ru; img-src 'self' data: music.yandex.ru *.yandex.net yapic.yandex.ru *.ytimg.com; frame-src data: frontend.vh.yandex.ru *.youtube.com music.yandex.ru;
-||twitch.tv^$important,csp=default-src 'self' 'unsafe-inline' 'unsafe-eval' wss: blob: data: *.jtvnw.net *.ttvnw.net *.twitchcdn.net *.twitch.tv *.facebook.com *.facebook.net *.recaptcha.net *.google.com *.gstatic.com *.algolia.net local.adguard.org injections.adguard.org *.cloudfront.net;
-||userload.co^$important,csp=script-src 'self' 'unsafe-inline' 'unsafe-eval' local.adguard.org injections.adguard.org;
-||hydracdn.*^$important,csp=script-src 'self' 'unsafe-inline' iamcdn.net local.adguard.org injections.adguard.org;
-||gomo.to^$important,csp=script-src 'self' 'unsafe-inline' *.googleapis.com local.adguard.org injections.adguard.org;
-||dood.to^$csp=script-src 'self' data: 'unsafe-inline' *.gstatic.com *.doodcdn.com *.google.com *.cloudflare.com;
-||videobin.co^$csp=script-src 'self' 'unsafe-inline' 'unsafe-eval' *.jsdelivr.net;
+||twitch.tv^$important,csp=default-src 'self' 'unsafe-inline' 'unsafe-eval' wss: blob: data: *.jtvnw.net *.ttvnw.net *.twitchcdn.net *.twitch.tv *.facebook.com *.facebook.net *.recaptcha.net *.google.com *.gstatic.com *.algolia.net local.adguard.org injections.adguard.org *.cloudfront.net *.fastly.net;
+||youtube.com^$important,csp=default-src 'self' 'unsafe-inline' 'unsafe-eval' blob: data: *.ggpht.com *.googlevideo.com *.ytimg.com *.googleusercontent.com *.google.com *.googleapis.com *.gstatic.com local.adguard.org injections.adguard.org;
+||vk.com^$important,csp=default-src 'self' 'unsafe-inline' 'unsafe-eval' blob: data: *.vkuseraudio.net *.userapi.com *.vk.com *.mycdn.me *.google.com *.gstatic.com local.adguard.org injections.adguard.org;
 ! Content Security Policy (CSP) END
 
 ! OTHER START
@@ -533,6 +522,7 @@ youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope > .ytd-she
 ||mobilemaps-pa.googleapis.com/*.ads.$important
 ||monitor.$domain=~monitor.firefox.com
 ||null^
+||spclient.wg.spotify.com/gabo-receiver-service/$important
 ||spclient.wg.spotify.com/ad-logic/$important
 ||spclient.wg.spotify.com/metrics-backend/$important
 ||stat.$third-party,important
@@ -551,10 +541,11 @@ youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope > .ytd-she
 /^https?:\/\/stream[\D]?bet\.[\w]+/$document,important
 |http*:*/*.gif|$document,important,domain=~appmifile.com|~github.com|~githubusercontent.com|~imgur.com|~wikimedia.org|~gitlab.com
 ||616wear.ru^$document,important
-||microsoftedgewelcome.microsoft.com^$document,important
+
 ||ali.pub^$document,important
 ||autonomiq.io/chropath/uninstall/$document,important
 ||bigbetclub.com^$document,important
+
 ||rt.com^$document
 ||githib.com^$document
 ||blocked.mts.ru^$document,important
@@ -604,6 +595,7 @@ youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope > .ytd-she
 ||downloadbrowsernow.com^$document,important
 ||galdarael.com^$document,important
 ||baxofalis.com^$document,important
+||xvideox.com^$document,important
 ! DOCUMENT END
 
 ! SUBDOCUMENT START
@@ -616,6 +608,7 @@ youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope > .ytd-she
 ! SUBDOCUMENT END
 
 ! SCRIPT START
+/^https?:\/\/[^\s]+\/sw\.js\?[^\s]+$/$important,script
 /\%(2F|3F|26|3D|23|2D|2E|5F)sw\.js$/$important,script
 /\.[a-z]+\/\?pu\=/$third-party,important,script
 /\/js[a-z0-9]+\/[a-z0-9]{0,14}\.js$/$important,script
@@ -655,10 +648,11 @@ youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope > .ytd-she
 |http*:*/wl.js$important,script
 ||scdn.co/cdn/js/gtag.$important,script,domain=spotify.com
 /^https?:\/\/[a-g0-9]{20,}\.online\/[a-g0-9]{20,}\.js$/$important,third-party,script
+||youtube.com/*/player/*/ad.js$script,important
 ! SCRIPT END
 
 ! XMLHTTPREQUEST START
-/^https?:\/\/[0-9a-z]{11,20}.*.com\/.*/$third-party,important,xmlhttprequest,domain=~aliexpress.com|~aliexpress.ru|~mts.ru
+/^https?:\/\/[0-9a-z]{11,20}.*.com\/.*/$third-party,important,xmlhttprequest,domain=~aliexpress.com|~aliexpress.ru|~mts.ru|~ninjastream.to|~deepl.com
 /^https?:\/\/[^\s]+(\.wasm|\.wsm|\.wa)$/$important,xmlhttprequest,domain=~twitch.tv
 |http*:*/channels/*/extensions$important,xmlhttprequest,domain=twitch.tv
 ||addons.opera.com/themes/$important,xmlhttprequest
@@ -684,13 +678,13 @@ youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope > .ytd-she
 /[-._?&=#/](event|stat)logs?(ging|ers?)?[-.0-9_?&=#/]/$image,important,other,script,xmlhttprequest
 /[-._?&=#/](logs?|img)[-._?&=#/]?(?:failure|info|type|events?|entry|request|statu?s?|view|edpage)[-._?&=#/]?/$image,important,other,script,xmlhttprequest
 /[-._?&=#/](player|client|csi|gen(erate)?|stream|logs?|live)[-._?&=#/]?204[-._?&=#/]?/$image,important,other,xmlhttprequest
-/[-._?&=#/][a-zA-Z]{8,}track(ers?|ing)[-.0-9_?&=#/]/$image,important,other,script,xmlhttprequest,domain=~ok.ru
-/[-._?&=#/]analy((ti|zer)([\W\w]+)?)?[-.0-9_?&=#/]/$image,important,other,script,xmlhttprequest,domain=~analytics.google.com|~analyticssuitefrontend-pa.clients6.google.com|~analyticsinsights-pa.clients6.google.com
-/[-._?&=#/]bann?ers?[-.0-9_?&=#/]/$image,important,script,subdocument,xmlhttprequest,domain=~aliexpress.com|~aliexpress.ru|~discord.com|~dropbox.com|~esetnod32.ru|~f-droid.org|~fandom.com|~gosuslugi.ru~leon.ru|~live.com|~mts.ru|~office.com|~ok.ru|~rt.ru|~ru-mi.com|~sberbank.ru|~translate.google.com|~twitch.tv|~radiorecord.ru
+/[-._?&=#/][a-zA-Z]{8,}track(ers?|ing)[-.0-9_?&=#/]/$image,important,other,script,xmlhttprequest,domain=~ok.ru|~fandom.com
+/[-._?&=#/]analyti([\W\w]+)[-.0-9_?&=#/]/$image,important,other,script,xmlhttprequest,domain=~analytics.google.com|~analyticssuitefrontend-pa.clients6.google.com|~analyticsinsights-pa.clients6.google.com|~fandom.com|~aliexpress.ru|~aliexpress.com|~vk.com
+/[-._?&=#/]bann?ers?[-.0-9_?&=#/]/$image,important,script,subdocument,xmlhttprequest,domain=~aliexpress.com|~aliexpress.ru|~discord.com|~dropbox.com|~esetnod32.ru|~f-droid.org|~fandom.com|~gosuslugi.ru|~leon.ru|~live.com|~mts.ru|~office.com|~ok.ru|~rt.ru|~ru-mi.com|~sberbank.ru|~google.com|~twitch.tv|~radiorecord.ru
 /[-._?&=#/]logs?(ging|impressions?|ers?)?[-.0-9_?&=#/]/$image,important,other,script,xmlhttprequest,domain=~aliexpress.com|~aliexpress.ru|~dns-shop.ru|~docviewer.yandex.ru|~github.com|~gitlab.com|~instagram.com|~mi.com|~twitch.tv|~yadi.sk
 /[-._?&=#/]piwik[-.0-9_?&=#/]/$image,important,script
 /[-._?&=#/]pixel[-._?&=#/]/$image,important,script,subdocument,xmlhttprequest,domain=~yandex.ru
-/[-._?&=#/]track(ers?|ing)[-.0-9_?&=#/]/$image,important,other,script,xmlhttprequest,domain=~alipay.com|~analytics.google.com|~fandom.com|~parimatch.ru|~pochta.ru|~yandex.ru|~aliexpress.com
+/[-._?&=#/]track(ers?|ing)[-.0-9_?&=#/]/$image,important,other,script,xmlhttprequest,domain=~alipay.com|~analytics.google.com|~fandom.com|~parimatch.ru|~pochta.ru|~yandex.ru|~aliexpress.com|~aliexpress.ru
 /[-._?&=#/]vast[-.0-9_?&=#/]/$image,important,other,script,xmlhttprequest,domain=~github.com|~gitlab.com|~twitch.tv
 /\/pi?xe?l?\.(?:jp(?:e?g|e|2)|gif|png|tiff?|bmp|ico|hei[fc]|webp|jxr|wdp|dng|cr2|arw|jsp?|x?html?|cgi|php|swf|svg)/$image,important,script,subdocument,xmlhttprequest,domain=~playground.ru|~imgur.com
 /^https?:\/\/[0-1]{5,}\.com/$third-party,important,script,xmlhttprequest
@@ -705,23 +699,18 @@ youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope > .ytd-she
 ! COMBINED END
 
 ! TRASH START
-github.com##.js-comment-container:has([class*="author"][href="/DandelionSprout"])[src]:not([class*="avatar"])
 @@||app.adjust.com^|$badfilter
 @@||www.googleadservices.com^|$badfilter
-freebitco.in###bottom_user_ads_container
 @@||ttvnw.net^$xmlhttprequest
 infourok.ru##div#aa-popup
-www.google.*#@#+js(remove-attr, onmousedown|ping, a[href][onmousedown]\, a[href][ping])
 office.com##ohp-mobile-app-banner
 @@||redirect.appmetrica.yandex.com^|$badfilter
 @@||imasdk.googleapis.com^|$badfilter
 @@||pagead.l.doubleclick.net^|$badfilter
 @@||www.googleadservices.com^|$badfilter
 @@||googleadapis.l.google.com^|$badfilter
-||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$xmlhttprequest,redirect-rule=nooptext,badfilter
-mexa.sh##div[id*="bidadx_tag"]
 @@||launches.appsflyer.com^|$badfilter
 |http*$app=com.adups.fota.sysoper|com.adups.fota,badfilter
-||windowspro.ru/universal$important,script
 freehat.cc##[class*="anons-"], .sb-block_tp_social.sb-block, #player-switcher, #footer, .episode-quest-link
+||xyz^$third-party,script,xmlhttprequest,domain=~anidub.com|~animedia.pro|~animeheaven.ru|~animevibe.wtf|~app.element.io|~assistir-filme.biz|~avtomaty-i-bonusy.com|~chelentano.top|~coomeet.com|~crackstreams.com|~crackstreams.ga|~csgoreports.com|~cvid.kiev.ua|~emblix.cc|~estream.to|~europixhd.io|~films.hds-stream.com|~flowcdn.nl|~funtik.tv|~getvi.tv|~hanime.tv|~hentaiz.org|~herokuapp.com|~infoua.biz|~jokehd.com|~jokerswidget.com|~kinobig.me|~kinoguru.be|~kinoguru.me|~kristinita.ru|~live-golf.stream|~live-nhl.stream|~lookbase.xyz|~magicfilm.net|~mail.google.com|~map-a-date.cc|~matchat.online|~mikeamigorein.xyz|~miranimbus.ru|~my.mail.ru|~nccg.ru|~newdmn.icu|~onmovies.se|~playjoke.xyz|~roadhub.ru|~roblox.com|~sextop.net|~soccer365.ru|~soonwalk.net|~sportsbay.org|~streetbee.io|~streetbee.ru|~telerium.club|~telerium.live|~uacycling.info|~uploadedpremiumlink.net|~vk.com|~vmeste.tv|~web.app,badfilter
 ! TRASH END
