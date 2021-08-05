@@ -695,7 +695,7 @@ youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope > .ytd-she
 ||facebook.com/ajax/bz$important,other,xmlhttprequest
 ||yastatic.net/awaps-ad-sdk-js/$important,script,xmlhttprequest
 ||yastatic.net/daas/atom.js|$important,script,xmlhttprequest
-||youtube.com/api/stats/$image,important,other,xmlhttprequest
+! ||youtube.com/api/stats/$image,important,other,xmlhttprequest
 ! COMBINED END
 
 ! TRASH START
